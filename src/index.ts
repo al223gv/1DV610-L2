@@ -1,5 +1,6 @@
-import { Validator } from './lib/validator.js'
+import { TextAnalyzer } from "./lib/TextAnalyzer.js";
 
-export const validator = new Validator()
+const textAnalyzer = new TextAnalyzer()
 
-console.log(validator.isArray.isAlphaNumericOnly([ 'AlphaNumeric', '0123910' ]))
+console.log(textAnalyzer.count.numberOfWords('hello, hello, hello'))
+console.log(textAnalyzer.count.numberOfWords('low!high croocodile,,,,KepS.,.,.!!Gris'))
