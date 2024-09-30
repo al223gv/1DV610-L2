@@ -5,10 +5,14 @@ export class CountAnalysis {
     this.#nonLatinCharacters = new RegExp('[^a-zA-Z ]', 'g')
   }
 
-  numberOfWords (text: string): number {
+  assertIsString (text: unknown) {
     if (typeof text !== 'string') {
       throw new TypeError('Text is not of type string.')
     }
+  }
+
+  numberOfWords (text: string): number {
+    this.assertIsString(text)
 
     const cleanedText = text.replaceAll(this.#nonLatinCharacters, ' ').trim()
     const words = cleanedText.split(/\s+/)
@@ -21,5 +25,19 @@ export class CountAnalysis {
     }
 
     return numberOfWords
+  }
+
+  numberOfPeriods (text: string): number {
+    this.assertIsString(text)
+
+    let numberOfPeriods = 0
+
+    for (const character of text) {
+      if (character === '.') {
+        numberOfPeriods++
+      }
+    }
+
+    return numberOfPeriods
   }
 }

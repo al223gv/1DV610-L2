@@ -1,4 +1,4 @@
-import { CountAnalysis } from "./CountAnalysis.js";
+import { CountAnalysis } from "./lib/CountAnalysis.js";
 
 export class TextAnalyzer {
 
