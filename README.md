@@ -14,6 +14,14 @@ Module can be imported as a named import and initialized as per the following im
 
 ![How to import and initialize a textAnalyzer object](./import-initialize-module.png)
 
+``` javascript
+const { TextAnalyzer } from 'textAnalyzer'
+```
+
+``` javascript
+const textAnalyzer = new TextAnalyzer()
+```
+
 ## List of Available Methods
 
 | Method     | Arguments   | Description   |
