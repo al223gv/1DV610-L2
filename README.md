@@ -10,14 +10,11 @@ There is currently no external dependencies needed to use this module.
 
 ## How to use the module
 
-Module can be imported as a named import and initialized as per the following image:
-
-![How to import and initialize a textAnalyzer object](./import-initialize-module.png)
-
+To use Text Analyzer, import the library as a named import:
 ``` javascript
-const { TextAnalyzer } from 'textAnalyzer'
+import { TextAnalyzer } from 'textAnalyzer'
 ```
-
+then, instantiate a new instance of the Text analyzer:
 ``` javascript
 const textAnalyzer = new TextAnalyzer()
 ```
