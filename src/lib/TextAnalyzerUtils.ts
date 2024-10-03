@@ -16,7 +16,7 @@ export class TextAnalyzerUtils {
 
     const disallowedCharactersRegex = new RegExp(`[^a-zA-Z${allowedCharacters}]`, 'g')
 
-    const cleanedText = text.replace(disallowedCharactersRegex, '')
+    const cleanedText = text.replace(disallowedCharactersRegex, ' ')
 
     return cleanedText
   }
@@ -31,7 +31,7 @@ export class TextAnalyzerUtils {
   }
 
   extractWordsFromText (text: string): string[] {
-    const textWithoutNonLatinCharacters = this.removeNonLatinExceptAllowed(text)
+    const textWithoutNonLatinCharacters = this.removeNonLatinExceptAllowed(text, ' ')
 
     const textWithSingleSpaces = this.stripMultipleSpaces(textWithoutNonLatinCharacters)
 

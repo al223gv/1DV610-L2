@@ -1,3 +1,4 @@
+import { AverageAnalysis } from "./AverageAnalysis.js";
 import { CountAnalysis } from "./CountAnalysis.js";
 import { FrequencyAnalysis } from "./FrequencyAnalysis.js";
 
@@ -9,5 +10,9 @@ export class TextAnalyzer {
 
   get frequency (): FrequencyAnalysis {
     return new FrequencyAnalysis()
+  }
+
+  get average (): AverageAnalysis {
+    return new AverageAnalysis()
   }
 }
