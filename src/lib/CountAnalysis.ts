@@ -59,20 +59,12 @@ export class CountAnalysis {
     return vowels.length
   }
 
-  _removeNonLatinExceptAllowed (text: string, allowedCharacters: string): string {
-    const disallowedCharactersRegex = new RegExp(`[^a-zA-Z${allowedCharacters}]`, 'g')
-
-    const cleanedText = text.replace(disallowedCharactersRegex, '')
-
-    return cleanedText
-  }
-
   numberOfSentences (text: string, customAbbreviations: string[]): number {
     this.#utils.assertIsString(text)
 
     const sentenceEndingPattern = new RegExp('[a-zA-Z ]+[.!?]', 'g')
 
-    const cleanedText = this._removeNonLatinExceptAllowed(text, ' .!?')
+    const cleanedText = this.#utils.removeNonLatinExceptAllowed(text, ' .!?')
 
     const abbreviationStrippedText = this._stripCustomAbbreviation(
       cleanedText, customAbbreviations)
