@@ -1,6 +1,12 @@
-import { util } from "./Util.js"
+import { TextAnalyzerUtils } from "./TextAnalyzerUtils.js"
 
 export class FrequencyAnalysis {
+  #utils: TextAnalyzerUtils
+
+  constructor () {
+    this.#utils = new TextAnalyzerUtils()
+  }
+
   words (text: string): Map<string, number> {
     const wordFrequencyMap = this._processWordFrequencies(text)
 
@@ -18,7 +24,7 @@ export class FrequencyAnalysis {
   }
 
   mostCommonWords (text: string, n: number): Map<string, number> {
-    util.assertIsPositiveNumber(n)
+    this.#utils.assertIsPositiveNumber(n)
 
     const wordFrequencyMap = this._processWordFrequencies(text)
 
@@ -28,7 +34,7 @@ export class FrequencyAnalysis {
   }
 
   _processWordFrequencies (text: string): Map<string, number> {
-    const words = this._extractWordsFromText(text)
+    const words = this.#utils.extractWordsFromText(text)
 
     const wordFrequencyMap = this._createTokenFrequencyMap(words)
 
@@ -38,7 +44,7 @@ export class FrequencyAnalysis {
   }
 
   _sliceWordFrequencyMap (wordMap: Map<string, number>, n: number): Map<string, number> {
-    util.assertIsPositiveNumber(n)
+    this.#utils.assertIsPositiveNumber(n)
 
     const slicedWordMap: Map<string, number> = new Map<string, number>()
 
@@ -53,33 +59,6 @@ export class FrequencyAnalysis {
     }
 
     return slicedWordMap
-  }
-
-  _stripNonLatinCharacters (text: string) {
-    const nonLatinCharacters = new RegExp('[^a-zA-Z ]', 'g')
-
-    const latinCharactersAndSpaces = text.replace(nonLatinCharacters, '')
-
-    return latinCharactersAndSpaces
-  }
-
-  _stripMultipleSpaces (text: string) {
-    const multipleSpaces = new RegExp('\\s+', 'g')
-
-    const singleSpaced = text.replace(multipleSpaces, ' ')
-      .trim()
-    
-    return singleSpaced
-  }
-
-  _extractWordsFromText (text: string): string[] {
-    const textWithoutNonLatinCharacters = this._stripNonLatinCharacters(text)
-
-    const textWithSingleSpaces = this._stripMultipleSpaces(textWithoutNonLatinCharacters)
-
-    const words = textWithSingleSpaces.split(' ')
-
-    return words
   }
 
   _extractCharactersFromText (text: string): string[] {
