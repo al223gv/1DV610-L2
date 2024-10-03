@@ -4,7 +4,10 @@ const config: Config = {
   preset: 'ts-jest',
   verbose: true,
   testEnvironment: 'node',
-  transform: {}
+  transform: {},
+  moduleNameMapper: {
+    '(.+)\\.js': '$1'
+  }
 }
 
 export default config
