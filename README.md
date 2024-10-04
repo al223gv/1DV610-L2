@@ -29,7 +29,7 @@ const textAnalyzer = new TextAnalyzer()
 | count.charactersExcludingSpaces | text: string | Counts the number of characters in a string. Excluding spaces. Returns an integer representing the total amount of characters. |
 | count.vowels | text: string | Counts the number of vowels in a string. Only latin characters without accents are included. Returns an integer representing the total amount of vowels. |
 | count.sentences | text: string, customAbbreviations: string[] | Counts the number of sentences in a string. Excluding custom abbreviations. |
-| frequency.words | text: string | Counts the frequency of the word in the text. Return a Map representing the frequency words.|
-| frequency.characters | text: string | Counts the frequency of characters in the text. Returns a Map representing the frequency of characters |
-| frequency.mostCommonWords | text: string, amount: number | Counts the frequency of the most common words. Returns a Map representing the frequency of the most common words. Amount of words that are returned are determined by the amount value. If no value is provided, all words will be returned. |
+| frequency.words | text: string | Calculates the frequency of words in the text. Return a Map representing the frequency words.|
+| frequency.characters | text: string | Calculates the frequency of characters in the text. Returns a Map representing the frequency of characters |
+| frequency.mostCommonWords | text: string, amount: number | Calculates the frequency of the most common words. Returns a Map representing the frequency of the most common words. Amount of words that are returned are determined by the amount value. If no value is provided, all words will be returned. |
 | average.wordLength | text: string | Calculates the average length of words of a text. Returns a decimal number with one decimal, representing the average word length. |
