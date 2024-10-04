@@ -19,6 +19,12 @@ then, instantiate a new instance of the Text analyzer:
 const textAnalyzer = new TextAnalyzer()
 ```
 
+To build the module from typescript to javascript:
+```
+npm run build
+```
+The resulting files will reside in the dist folder, which contain the whole module. The index.js file is only used to import the module and then export it, so one can directly import the folder to use the module and not a specific file.
+
 ## List of Available Methods
 
 | Method     | Arguments   | Description   |
