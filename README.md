@@ -10,7 +10,7 @@ There is currently no external dependencies needed to use this module.
 
 ## How to use the module
 
-To use Text Analyzer, import the library as a named import:
+**To use Text Analyzer**, import the library as a named import:
 ``` javascript
 import { TextAnalyzer } from 'textAnalyzer'
 ```
@@ -19,11 +19,17 @@ then, instantiate a new instance of the Text analyzer:
 const textAnalyzer = new TextAnalyzer()
 ```
 
-To build the module from typescript to javascript:
+**To build the module from typescript to javascript:**
 ```
 npm run build
 ```
 The resulting files will reside in the dist folder, which contain the whole module. The index.js file is only used to import the module and then export it, so one can directly import the folder to use the module and not a specific file.
+
+**To test the application:**
+```
+npm run test
+```
+This is a partial test, that currently only test one method. Not very useful at the moment. Will be updated.
 
 ## List of Available Methods
 
