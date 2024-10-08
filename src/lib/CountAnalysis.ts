@@ -18,14 +18,7 @@ export class CountAnalysis {
 
     const words = this.#utils.extractWordsFromText(text)
 
-    let numberOfWords = 0
-    for (const word of words) {
-      if (word.length > 0) {
-        numberOfWords++
-      }
-    }
-
-    return numberOfWords
+    return this._countNonEmptyWords(words)
   }
 
   /**
@@ -51,7 +44,7 @@ export class CountAnalysis {
    * Calculate number of characters, including spaces, from a given text input.
    *
    * @param {string} text The input text to analyze.
-   * @returns {number} Number of characters.
+   * @returns {number} Number of characters, including spaces.
    */
   charactersIncludingSpaces (text: string): number {
     this.#utils.assertIsString(text)
@@ -63,14 +56,14 @@ export class CountAnalysis {
    * Calculate number of characters, excluding spaces, from a given text input.
    *
    * @param {string} text The input text to analyze.
-   * @returns {number} Number of characters.
+   * @returns {number} Number of characters, excluding spaces.
    */
   charactersExcludingSpaces (text: string): number {
     this.#utils.assertIsString(text)
 
-    const textWithoutSpace = text.replaceAll(' ', '')
+    const textWithoutSpaces = text.replaceAll(' ', '')
 
-    return textWithoutSpace.length
+    return textWithoutSpaces.length
   }
 
   /**
@@ -93,32 +86,47 @@ export class CountAnalysis {
    * Calculate number of sentences from a given text input.
    *
    * @param {string} text The input text to analyze.
-   * @param {string[]} customAbbreviations List of custom abbrevations that will be 
+   * @param {string[]} customAbbreviations List of abbrevations that will be 
    *                                       omitted and not calculated as a sentence.
    * @returns {number} Number of sentences.
    */
-  sentences (text: string, customAbbreviations: string[]): number {
+  sentences (text: string, customAbbreviations: string[] = []): number {
     this.#utils.assertIsString(text)
-
-    const sentenceEndingPattern = new RegExp('[a-zA-Z ]+[.!?]', 'g')
 
     const cleanedText = this.#utils.removeNonLatinExceptAllowed(text, ' .!?')
 
-    const abbreviationStrippedText = this._stripCustomAbbreviation(
+    const textWithoutAbbreviations = this._removeCustomAbbreviations(
       cleanedText, customAbbreviations)
 
-    const numberOfSentences = abbreviationStrippedText
-      .match(sentenceEndingPattern) ?? []
-
-    return numberOfSentences.length
+    return this._countSentenceEndings(textWithoutAbbreviations)
   }
 
-  _stripCustomAbbreviation (text: string, customAbbreviations: string[]): string {
-    let result = text
-    for (const abbreviation of customAbbreviations) {
-      result = result.replaceAll(abbreviation, ' ')
+  _countNonEmptyWords(words: string[]): number {
+    let numberOfWords = 0
+    for (const word of words) {
+      if (word.length > 0) {
+        numberOfWords++
+      }
     }
 
-    return result
+    return numberOfWords
+  }
+
+  _countSentenceEndings (text: string): number {
+    const sentenceEndingRegex = new RegExp('[a-zA-Z ]+[.!?]', 'g')
+
+    const sentences = text.match(sentenceEndingRegex) ?? []
+
+    return sentences.length
+  }
+
+  _removeCustomAbbreviations (text: string, customAbbreviations: string[]): string {
+    if (customAbbreviations.length === 0) {
+      return text
+    }
+
+    const abbreviationsRegex = new RegExp(`\\b(${customAbbreviations.join('|')})\\b`, 'g')
+
+    return text.replace(abbreviationsRegex, ' ')
   }
 }
