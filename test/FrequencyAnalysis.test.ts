@@ -38,9 +38,11 @@ describe('FrequencyAnalysis', () => {
     const amount = 2
     const result = frequencyAnalysis.mostCommonWords(text, amount)
 
-    expect(result).toEqual(new Map<string, number>([
+    const expectedResult = new Map<string, number>([
       [ 'september', 3 ],
       [ 'april', 2 ]
-    ]))
+    ])
+
+    expect(result).toEqual(expectedResult)
   })
 })
