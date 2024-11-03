@@ -32,4 +32,15 @@ describe('FrequencyAnalysis', () => {
     expect(result.get('r')).toBe(1)
     expect(result.get('d')).toBe(1)
   })
+
+  test('MostCommonWords method should return correct frequency map', () => {
+    const text = 'April april mars january september september september'
+    const amount = 2
+    const result = frequencyAnalysis.mostCommonWords(text, amount)
+
+    expect(result).toEqual(new Map<string, number>([
+      [ 'september', 3 ],
+      [ 'april', 2 ]
+    ]))
+  })
 })

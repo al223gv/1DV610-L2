@@ -48,7 +48,9 @@ export class FrequencyAnalysis {
 
     const words = this.utils.extractWordsFrom(text)
 
-    const wordFrequencyMap = this._createSortedTokenFrequencyMap(words)
+    const lowercaseWords = this.utils.toLowercase(words)
+
+    const wordFrequencyMap = this._createSortedTokenFrequencyMap(lowercaseWords)
 
     return this._sliceWordFrequencyMap(wordFrequencyMap, amount)
   }
