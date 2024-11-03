@@ -37,4 +37,8 @@ export class TextAnalyzerUtils {
 
     return textWithSingleSpaces.split(' ')
   }
+
+  public toLowercase(tokens: string[]): string[] {
+    return tokens.map(token => token.toLowerCase())
+  }
 }

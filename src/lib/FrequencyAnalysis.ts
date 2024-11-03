@@ -16,7 +16,9 @@ export class FrequencyAnalysis {
   public words (text: string): Map<string, number> {
     const words = this.utils.extractWordsFrom(text)
 
-    return this._createSortedTokenFrequencyMap(words)
+    const lowercaseWords = this.utils.toLowercase(words)
+
+    return this._createSortedTokenFrequencyMap(lowercaseWords)
   }
 
   /**
@@ -28,7 +30,9 @@ export class FrequencyAnalysis {
   public characters (text: string): Map<string, number> {
     const characters = this._extractCharactersFrom(text)
 
-    return this._createSortedTokenFrequencyMap(characters)
+    const lowercaseCharacters = this.utils.toLowercase(characters)
+
+    return this._createSortedTokenFrequencyMap(lowercaseCharacters)
   }
 
   /**
