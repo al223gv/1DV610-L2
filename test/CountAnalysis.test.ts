@@ -13,4 +13,11 @@ describe('CountAnalysis', () => {
 
     expect(results).toBe(4)
   })
+
+  test('Periods method should return correct number of periods', () => {
+    const text = 'Hello. This is a test. With some periods.'
+    const result = countAnalysis.periods(text)
+
+    expect(result).toBe(3)
+  })
 })
