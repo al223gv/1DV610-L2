@@ -40,4 +40,19 @@ describe('CountAnalysis', () => {
     
     expect(result).toBe(3)
   })
+
+  test('Sentences method should return correct number of sentences', () => {
+    const text = 'Hello. This is a test. With multiple sentences!'
+    const result = countAnalysis.sentences(text)
+
+    expect(result).toBe(3)
+  })
+
+  test('Sentences method should handle custom abbreviations correctly', () => {
+    const text = 'Mr. Stan went to St. patrick\'s cathedral. He saw Mrs. Pink.'
+    const customAbbreviations = [ 'Mr.', 'St.', 'Mrs.' ]
+    const result = countAnalysis.sentences(text, customAbbreviations)
+
+    expect(result).toBe(2)
+  })
 })
