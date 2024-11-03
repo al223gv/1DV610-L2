@@ -33,4 +33,11 @@ describe('CountAnalysis', () => {
 
     expect(result).toBe(10)
   })
+
+  test('Vowels method should return correct number of vowels', () => {
+    const text = 'hEllo world'
+    const result = countAnalysis.vowels(text)
+    
+    expect(result).toBe(3)
+  })
 })
