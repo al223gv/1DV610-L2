@@ -20,4 +20,17 @@ describe('CountAnalysis', () => {
 
     expect(result).toBe(3)
   })
+
+  test('CharactersIncludingSpaces method should return correct number of characters including spaces', () => {
+    const text = 'hello world'
+    const result = countAnalysis.charactersIncludingSpaces(text)
+    expect(result).toBe(11)
+  })
+
+  test('CharactersExcludingSpaces method should return correct number of characters excluding spaces', () => {
+    const text = 'hello world'
+    const result = countAnalysis.charactersExcludingSpaces(text)
+
+    expect(result).toBe(10)
+  })
 })
