@@ -1,4 +1,4 @@
-import { CountAnalysis } from './../src/lib/CountAnalysis.js'
+import { CountAnalysis } from '../src/lib/CountAnalysis.js'
 
 describe('CountAnalysis', () => {
   let countAnalysis = new CountAnalysis()
