@@ -9,7 +9,7 @@ export class TextAnalyzer {
    *
    * @returns {CountAnalysis} CountAnalysis object.
    */
-  get count (): CountAnalysis {
+  public get count (): CountAnalysis {
     return new CountAnalysis()
   }
 
@@ -18,7 +18,7 @@ export class TextAnalyzer {
    *
    * @returns {FrequencyAnalysis} FrequencyAnalysis object.
    */
-  get frequency (): FrequencyAnalysis {
+  public get frequency (): FrequencyAnalysis {
     return new FrequencyAnalysis()
   }
 
@@ -27,7 +27,7 @@ export class TextAnalyzer {
    *
    * @returns {AverageAnalysis} AverageAnalysis object.
    */
-  get average (): AverageAnalysis {
+  public get average (): AverageAnalysis {
     return new AverageAnalysis()
   }
 }

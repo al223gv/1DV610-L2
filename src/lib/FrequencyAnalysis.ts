@@ -1,10 +1,10 @@
 import { TextAnalyzerUtils } from "./TextAnalyzerUtils.js"
 
 export class FrequencyAnalysis {
-  #utils: TextAnalyzerUtils
+  private utils: TextAnalyzerUtils
 
   constructor () {
-    this.#utils = new TextAnalyzerUtils()
+    this.utils = new TextAnalyzerUtils()
   }
 
   /**
@@ -13,10 +13,10 @@ export class FrequencyAnalysis {
    * @param {string} text The input text to analyze.
    * @returns {Map<string, number>} Frequency map of words.
    */
-  words (text: string): Map<string, number> {
-    const wordFrequencyMap = this._processWordFrequencies(text)
+  public words (text: string): Map<string, number> {
+    const words = this.utils.extractWordsFrom(text)
 
-    return wordFrequencyMap
+    return this._createSortedTokenFrequencyMap(words)
   }
 
   /**
@@ -25,14 +25,10 @@ export class FrequencyAnalysis {
    * @param {string} text The input text to analyze.
    * @returns {Map<string, number>} Frequency map of characters.
    */
-  characters (text: string): Map<string, number> {
-    const characters = this._extractCharactersFromText(text)
+  public characters (text: string): Map<string, number> {
+    const characters = this._extractCharactersFrom(text)
 
-    const characterFrequencyMap = this._createTokenFrequencyMap(characters)
-
-    const sortedCharacterFrequencyMap = this._sortTokenFrequencyMap(characterFrequencyMap)
-
-    return sortedCharacterFrequencyMap
+    return this._createSortedTokenFrequencyMap(characters)
   }
 
   /**
@@ -42,29 +38,25 @@ export class FrequencyAnalysis {
    * @param {number} amount Number of words to include in the frequency map.
    * @returns {Map<string, number>} Frequency map of most common words.
    */
-  mostCommonWords (text: string, amount: number): Map<string, number> {
-    this.#utils.assertIsString(text)
-    this.#utils.assertIsPositiveNumber(amount)
+  public mostCommonWords (text: string, amount: number): Map<string, number> {
+    this.utils.assertIsString(text)
+    this.utils.assertIsPositiveNumber(amount)
 
-    const wordFrequencyMap = this._processWordFrequencies(text)
+    const words = this.utils.extractWordsFrom(text)
 
-    const mostCommonWords = this._sliceWordFrequencyMap(wordFrequencyMap, amount)
+    const wordFrequencyMap = this._createSortedTokenFrequencyMap(words)
 
-    return mostCommonWords
+    return this._sliceWordFrequencyMap(wordFrequencyMap, amount)
   }
 
-  _processWordFrequencies (text: string): Map<string, number> {
-    const words = this.#utils.extractWordsFromText(text)
+  private _createSortedTokenFrequencyMap (tokens: string[]): Map<string, number> {
+    const tokenFrequencyMap = this._createTokenFrequencyMap(tokens)
 
-    const wordFrequencyMap = this._createTokenFrequencyMap(words)
-
-    const sortedWordFrequencyMap = this._sortTokenFrequencyMap(wordFrequencyMap)
-
-    return sortedWordFrequencyMap
+    return this._sortTokenFrequencyMap(tokenFrequencyMap)
   }
 
-  _sliceWordFrequencyMap (wordMap: Map<string, number>, amount: number): Map<string, number> {
-    this.#utils.assertIsPositiveNumber(amount)
+  private _sliceWordFrequencyMap (wordMap: Map<string, number>, amount: number): Map<string, number> {
+    this.utils.assertIsPositiveNumber(amount)
 
     const slicedWordMap: Map<string, number> = new Map<string, number>()
 
@@ -81,13 +73,13 @@ export class FrequencyAnalysis {
     return slicedWordMap
   }
 
-  _extractCharactersFromText (text: string): string[] {
+  private _extractCharactersFrom (text: string): string[] {
     const characters = text.split('')
     
     return characters
   }
 
-  _createTokenFrequencyMap (words: string[]): Map<string, number> {
+  private _createTokenFrequencyMap (words: string[]): Map<string, number> {
     const wordMap: Map<string, number> = new Map<string, number>()
 
     for (const word of words) {
@@ -98,7 +90,7 @@ export class FrequencyAnalysis {
     return wordMap
   }
 
-  _sortTokenFrequencyMap (wordFrequencyMap: Map<string, number>): Map<string, number> {
+  private _sortTokenFrequencyMap (wordFrequencyMap: Map<string, number>): Map<string, number> {
     const sortedWordFrequencyMap = new Map([ ...wordFrequencyMap.entries() ]
       .sort((a, b) => b[1] - a[1]))
     

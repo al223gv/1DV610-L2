@@ -1,10 +1,10 @@
 import { TextAnalyzerUtils } from "./TextAnalyzerUtils.js"
 
 export class CountAnalysis {
-  #utils: TextAnalyzerUtils
+  private utils: TextAnalyzerUtils
 
   constructor () {
-    this.#utils = new TextAnalyzerUtils()
+    this.utils = new TextAnalyzerUtils()
   }
 
   /**
@@ -13,12 +13,12 @@ export class CountAnalysis {
    * @param {string} text The input text to analyze.
    * @returns {number} Number of words.
    */
-  words (text: string): number {
-    this.#utils.assertIsString(text)
+  public words (text: string): number {
+    this.utils.assertIsString(text)
 
-    const words = this.#utils.extractWordsFromText(text)
+    const words = this.utils.extractWordsFrom(text)
 
-    return this._countNonEmptyWords(words)
+    return this._countNonEmpty(words)
   }
 
   /**
@@ -27,8 +27,8 @@ export class CountAnalysis {
    * @param {string} text The input text to analyze.
    * @returns {number} Number of periods.
    */
-  periods (text: string): number {
-    this.#utils.assertIsString(text)
+  public periods (text: string): number {
+    this.utils.assertIsString(text)
 
     let numberOfPeriods = 0
     for (const character of text) {
@@ -46,8 +46,8 @@ export class CountAnalysis {
    * @param {string} text The input text to analyze.
    * @returns {number} Number of characters, including spaces.
    */
-  charactersIncludingSpaces (text: string): number {
-    this.#utils.assertIsString(text)
+  public charactersIncludingSpaces (text: string): number {
+    this.utils.assertIsString(text)
 
     return text.length
   }
@@ -58,8 +58,8 @@ export class CountAnalysis {
    * @param {string} text The input text to analyze.
    * @returns {number} Number of characters, excluding spaces.
    */
-  charactersExcludingSpaces (text: string): number {
-    this.#utils.assertIsString(text)
+  public charactersExcludingSpaces (text: string): number {
+    this.utils.assertIsString(text)
 
     const textWithoutSpaces = text.replaceAll(' ', '')
 
@@ -72,8 +72,8 @@ export class CountAnalysis {
    * @param {string} text The input text to analyze.
    * @returns {number} Number of vowels.
    */
-  vowels (text: string): number {
-    this.#utils.assertIsString(text)
+  public vowels (text: string): number {
+    this.utils.assertIsString(text)
 
     const vowelRegex = new RegExp('[eoaiu]', 'gi')
 
@@ -90,10 +90,10 @@ export class CountAnalysis {
    *                                       omitted and not calculated as a sentence.
    * @returns {number} Number of sentences.
    */
-  sentences (text: string, customAbbreviations: string[] = []): number {
-    this.#utils.assertIsString(text)
+  public sentences (text: string, customAbbreviations: string[] = []): number {
+    this.utils.assertIsString(text)
 
-    const cleanedText = this.#utils.removeNonLatinExceptAllowed(text, ' .!?')
+    const cleanedText = this.utils.removeNonLatinExceptAllowed(text, ' .!?')
 
     const textWithoutAbbreviations = this._removeCustomAbbreviations(
       cleanedText, customAbbreviations)
@@ -101,7 +101,7 @@ export class CountAnalysis {
     return this._countSentenceEndings(textWithoutAbbreviations)
   }
 
-  _countNonEmptyWords(words: string[]): number {
+  private _countNonEmpty (words: string[]): number {
     let numberOfWords = 0
     for (const word of words) {
       if (word.length > 0) {
@@ -112,7 +112,7 @@ export class CountAnalysis {
     return numberOfWords
   }
 
-  _countSentenceEndings (text: string): number {
+  private _countSentenceEndings (text: string): number {
     const sentenceEndingRegex = new RegExp('[a-zA-Z ]+[.!?]', 'g')
 
     const sentences = text.match(sentenceEndingRegex) ?? []
@@ -120,7 +120,7 @@ export class CountAnalysis {
     return sentences.length
   }
 
-  _removeCustomAbbreviations (text: string, customAbbreviations: string[]): string {
+  private _removeCustomAbbreviations (text: string, customAbbreviations: string[]): string {
     if (customAbbreviations.length === 0) {
       return text
     }
