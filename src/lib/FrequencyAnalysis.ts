@@ -14,6 +14,10 @@ export class FrequencyAnalysis {
    * @returns {Map<string, number>} Frequency map of words.
    */
   public words (text: string): Map<string, number> {
+    if (text.length === 0) {
+      return new Map<string, number>
+    }
+
     const words = this.utils.extractWordsFrom(text)
 
     const lowercaseWords = this.utils.toLowercase(words)
@@ -28,6 +32,10 @@ export class FrequencyAnalysis {
    * @returns {Map<string, number>} Frequency map of characters.
    */
   public characters (text: string): Map<string, number> {
+    if (text.length === 0) {
+      return new Map<string, number>
+    }
+
     const characters = this._extractCharactersFrom(text)
 
     const lowercaseCharacters = this.utils.toLowercase(characters)

@@ -7,16 +7,27 @@ describe('FrequencyAnalysis', () => {
     frequencyAnalysis = new FrequencyAnalysis()
   })
 
+  test('Words method should return an empty map for an empty string', () => {
+    const text = ''
+    const result = frequencyAnalysis.words(text)
+
+    expect(result.size).toBe(0)
+  })
+
   test('Words method should return correct frequency map', () => {
     const text = 'Hello world world hello bear hello'
     const result = frequencyAnalysis.words(text)
-
-    console.log(result)
 
     expect(result.get('hello')).toBe(3)
     expect(result.get('world')).toBe(2)
     expect(result.get('bear')).toBe(1)
     expect(result.get('Zoinks!')).toBeUndefined()
+  })
+
+  test('characters method should return an empty map for an empty string', () => {
+    const text = ''
+    const result = frequencyAnalysis.characters(text)
+    expect(result.size).toBe(0)
   })
 
   test('Characters method should return correct frequency map', () => {
