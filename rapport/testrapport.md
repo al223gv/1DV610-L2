@@ -8,7 +8,7 @@ Av alla tester var det ett som misslyckades i modulen `CountAnalysis` och mer sp
 
 **Testmiljö**: Jest
 
-![Tests in Jest](tests-running-in-jest.png)
+![Tests in Jest](../tests-running-in-jest.png)
 
 ### AverageAnalysis
 - **Status**: godkänd
